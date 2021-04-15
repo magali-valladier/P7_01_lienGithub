@@ -27,10 +27,8 @@
 
 <script>
 export default {
-  name: 'Slider',
-  props: {
-    
-  }
+    name: Slider,
+
 }
 </script>
 
