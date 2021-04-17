@@ -1,30 +1,68 @@
 <template>
   <div>
     <b-carousel
-      img-width="1024"
-      img-height="480"
+      id="carousel-1"
+      v-model="slide"
+      :interval="3000"
+      controls
+      indicators
+      background="#ccc"
+      style="text-shadow: 1px 1px 2px #000;"
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd"
     >
-    <b-carousel-slide img-src="https://cdn.pixabay.com/photo/2012/03/04/00/43/architecture-22039_960_720.jpg">
-            <h1>Partagez !</h1>
+    <b-carousel-slide>
+      <template  v-slot:img>
+        <img
+            class="d-block img-fluid w-100"
+            width="1024"
+            height="480"
+            src="@/assets/build-groupomania.jpg"
+            alt="image slot"
+          >
+          </template>
       </b-carousel-slide>
-      <b-carousel-slide img-src="https://cdn.pixabay.com/photo/2015/01/20/12/51/imac-605421_960_720.jpg">
-            <h1>Communiquez !</h1>
+      <b-carousel-slide>
+      <template  v-slot:img>
+        <img
+            class="d-block img-fluid w-100"
+            width="1024"
+            height="480"
+            src="@/assets/slide-groupomania.png"
+            alt="image slot"
+          >
+          </template>
       </b-carousel-slide>
-      <b-carousel-slide img-src="https://cdn.pixabay.com/photo/2015/01/08/18/12/startup-593304_960_720.jpg">
-            <h1>Profitez !</h1>
+      <b-carousel-slide>
+      <template  v-slot:img>
+        <img
+            class="d-block img-fluid w-100"
+            width="1024"
+            height="480"
+            src="@/assets/slide-main.png"
+            alt="image slot"
+          >
+          </template>
       </b-carousel-slide>
-</b-carousel> 
-</div>
+    </b-carousel>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'Slider'   
-    
+    data() {
+      return {
+        slide: 0,
+        sliding: null
+      }
+    },
+    methods: {
+      onSlideStart() {
+        this.sliding = true
+      },
+      onSlideEnd() {
+        this.sliding = false
+      }
+    }
   }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
