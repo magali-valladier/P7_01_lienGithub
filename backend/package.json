@@ -22,5 +22,8 @@
     "helmet": "^4.5.0",
     "sequelize": "^6.6.2",
     "xss": "^1.0.8"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
   }
 }
