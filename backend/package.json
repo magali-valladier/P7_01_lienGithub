@@ -17,11 +17,13 @@
   },
   "homepage": "https://github.com/magali-valladier/P7_01_lienGithub#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
     "helmet": "^4.5.0",
     "jsonwebtoken": "^8.5.1",
+    "maskdata": "^1.1.4",
     "multer": "^1.4.2",
     "password-validator": "^5.1.1",
     "sequelize": "^6.6.2",
