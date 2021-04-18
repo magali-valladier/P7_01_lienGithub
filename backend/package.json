@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend du P7 Groupomania",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magali-valladier/P7_01_lienGithub.git"
+  },
+  "author": "Magali Valladier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/magali-valladier/P7_01_lienGithub/issues"
+  },
+  "homepage": "https://github.com/magali-valladier/P7_01_lienGithub#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "helmet": "^4.5.0",
+    "sequelize": "^6.6.2",
+    "xss": "^1.0.8"
+  }
+}
