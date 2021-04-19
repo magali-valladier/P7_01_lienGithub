@@ -4,6 +4,7 @@ const path = require("path");
 const xss = require('xss');
 const helmet = require('helmet');
 const rateLimit = require("express-rate-limit");
+const mysql = require('mysql');
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
 app.use((req, res, next) => {
@@ -13,7 +14,17 @@ app.use((req, res, next) => {
     next();
   });
 
-  app.use('/images', express.static(path.join(__dirname, 'images')));
+  const db = mysql.createConnection({
+
+    host: "localhost",
+ 
+    user: "root",
+ 
+    password: "Digimaglink13"
+ 
+  });
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
   //input sanitization against XXS attacks(helmet also does the same in this package)
 app.use(xss());
