@@ -5,7 +5,7 @@ const xss = require('xss');
 const helmet = require('helmet');
 const rateLimit = require("express-rate-limit");
 const mysql = require('mysql');
-const { Sequelize, Model, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -23,6 +23,22 @@ app.use((req, res, next) => {
     password: "Digimaglink13"
  
   });
+  db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connecté à la base de données MySQL!");
+  });
+
+  const sequelize = new Sequelize("Groupomania", "root", "Digimaglink13", {
+    dialect: "mysql",
+    host: "localhost"
+});
+
+try {
+  sequelize.authenticate();
+  console.log('Connecté à la base de données MySQL!');
+} catch (error) {
+  console.error('Impossible de se connecter, erreur suivante :', error);
+}
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
