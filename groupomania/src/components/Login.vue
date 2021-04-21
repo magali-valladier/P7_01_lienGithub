@@ -21,9 +21,10 @@
             name="email"
             type="email"
             class="form-control form-control-sm"
-            v-model.trim="$v.email.$model"
-            @input="$v.email.$touch">
+            v-model="email"
+            >
         </div>
+        <span class="error" v-if="!email.required">Champ email manquant</span>
     </div>
     </div>
 
@@ -42,15 +43,15 @@
             name="password"
             type="password"
             class="form-control form-control-sm"
-            v-model.trim="$v.password.$model"
-            @input="$v.password.$touch">
-            
+            v-model="password"
+           >
         </div>
+        <span class="error" v-if="!password.required">Champ mot de passe manquant</span>
     </div>
     </div>
-    <div class="error" v-if="!$v.email.required">Champ email manquant</div>
-    <div class="error" v-if="!$v.password.required">Champ mot de passe manquant</div>
-    <div class="error" v-if="!$v.password.minLength">{{$v.name.$params.minLength.min}} caractères min !.</div>
+    
+    
+    <span class="error" v-if="!password.minLength">{{$v.name.$params.minLength.min}} caractères min !.</span>
     <button class="btn btn-dark btn-sm" type="submit">Connexion</button>
     </form>
     <p> Pas encore inscrit ? Créez votre compte dès aujourd'hui !</p>
@@ -61,7 +62,9 @@
 
 <script>
 import {required, email, password, minLength} from "vuelidate/lib/validators"; 
+
 export default {
+name: 'Login',
 data() {
     return {
     email: null,

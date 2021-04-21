@@ -16,11 +16,13 @@ app.use((req, res, next) => {
 
   const db = mysql.createConnection({
 
-    host: "localhost",
+    host: 'localhost',
  
-    user: "root",
+    user: 'root',
  
-    password: "Digimaglink13"
+    password: 'root',
+
+    database: 'groupomania'
  
   });
   db.connect(function(err) {
