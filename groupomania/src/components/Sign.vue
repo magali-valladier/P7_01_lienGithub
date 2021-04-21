@@ -4,7 +4,6 @@
 
 <form id="form"
     @submit.prevent="checkForm"
-    action="Post.vue"
     method="post"
     novalidate="true">
         
@@ -19,12 +18,12 @@
         <input
             id="email"
             name="email"
-            type="text"
+            type="email"
             class="form-control form-control-sm"
             v-model.trim="$v.email.$model"
             >
         </div>
-        <span class="error" v-if="!email.required">Champ email manquant</span>
+        <span class="error" v-if="!email.required">Email manquant</span>
     </div>
     </div>
 
@@ -46,8 +45,8 @@
             v-model.trim="$v.password.$model"
            >
         </div>
-        <span class="error" v-if="!password.required">Champ mot de passe manquant</span> <br>
-        <span class="error" v-if="!password.minLength">{{$v.password.$params.minLength.min}} caractères min !.</span>
+        <span class="error" v-if="!checkForm()">Mot de passe manquant</span> <br>
+        <span class="error" v-if="!checkForm()">{{$v.password.$params.minLength.min}} caractères min !.</span>
     </div>
     </div>
     
@@ -60,7 +59,7 @@
 
 <script>
 import {required,minLength} from "vuelidate/lib/validators"; 
-
+const axios = require('axios');
 export default {
 name: 'Sign',
 data() {
@@ -79,11 +78,11 @@ validations: {
     }
 },
 methods:{
-    checkForm: function (e) {
+    checkForm: function () {
         if (this.email && this.password) {
-            return true
+          return axios.post('/post').then (response =>(console.log(response)))
+            
         }
-        e.preventDefault();
     }
 }
 } 
