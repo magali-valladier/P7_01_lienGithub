@@ -51,10 +51,9 @@
     </div>
     </div>
     
-    <button class="btn btn-dark btn-sm" type="submit" v-on:click="checkForm()">Connexion</button>
+    <button class="btn btn-dark btn-sm" type="submit" v-on:click="checkForm()">S'inscrire</button>
     </form>
-    <p> Pas encore inscrit ? Créez votre compte dès aujourd'hui !</p>
-    <button class="btn btn-dark btn-sm" v-on:click="goSignin()" >Inscription</button>
+    
 </div>
 </template>
 
@@ -63,7 +62,7 @@
 import {required,minLength} from "vuelidate/lib/validators"; 
 
 export default {
-name: 'Login',
+name: 'Sign',
 data() {
     return {
     email: "",
@@ -85,9 +84,6 @@ methods:{
             return true
         }
         e.preventDefault();
-    },
-    goSignin(){
-        this.$router.push('Signin');
     }
 }
 } 
