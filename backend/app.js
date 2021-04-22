@@ -4,6 +4,8 @@ const path = require("path");
 const xss = require('xss-clean');
 const helmet = require('helmet');
 const rateLimit = require("express-rate-limit");
+const postsRoutes = require("./routes/posts");
+const userRoutes = require("./routes/user");
 const mysql = require('mysql');
 const { Sequelize } = require('sequelize');
 const axios = require('axios');
@@ -31,7 +33,7 @@ app.use((req, res, next) => {
     console.log("Connecté à la base de données MySQL!");
   });
 
-  const sequelize = new Sequelize("Groupomania", "root", "Digimaglink13", {
+  const sequelize = new Sequelize("Groupomania", "root", "root", {
     dialect: "mysql",
     host: "localhost"
 });
@@ -45,6 +47,9 @@ try {
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+
+app.use('/api/posts', postsRoutes);
+app.use('/api/auth', userRoutes);
   //input sanitization against XXS attacks(helmet also does the same in this package)
 app.use(xss());
 
