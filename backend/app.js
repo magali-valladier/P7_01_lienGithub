@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const rateLimit = require("express-rate-limit");
 const mysql = require('mysql');
 const { Sequelize } = require('sequelize');
+const axios = require('axios');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

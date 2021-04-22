@@ -2,10 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const User = sequelize.define('User', {
   // Model attributes are defined here
-  email: {
+  pseudo: {
     type: DataTypes.STRING,
     allowNull: false
   },
+  
   password: {
     type: DataTypes.STRING
     // allowNull defaults to true
