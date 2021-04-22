@@ -1,19 +1,22 @@
-const { Sequelize, DataTypes } = require('sequelize');
-
-const User = sequelize.define('User', {
-  // Model attributes are defined here
-  pseudo: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  
-  password: {
-    type: DataTypes.STRING
-    // allowNull defaults to true
-  }
-}, {
-  // Other model options go here
-});
-
-// `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    
+    static associate(models) {
+      models.User.hasMany(models.Post),
+      models.User.hasMany(models.Comment)
+    }
+  };
+  User.init({
+    pseudo: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};

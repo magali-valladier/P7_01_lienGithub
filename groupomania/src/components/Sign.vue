@@ -1,6 +1,7 @@
 <template>
-<div class="login col-sm-6 mx-auto bg-white my-50">
-    <h3 class="text-secondary">Me connecter</h3>
+<div class="bg-primary">
+<div class="card login col-sm-6 mx-auto bg-white my-25">
+    <h3 class="text-secondary">Créer un compte</h3>
 
 <form id="form"
     @submit.prevent="checkForm"
@@ -45,14 +46,15 @@
             v-model.trim="$v.password.$model"
            >
         </div>
-        <span class="error" v-if="!checkForm()">Mot de passe manquant</span> <br>
-        <span class="error" v-if="!checkForm()">{{$v.password.$params.minLength.min}} caractères min !.</span>
+        <span class="error" v-if="!password.required()">Mot de passe manquant</span> <br>
+        <span class="error" v-if="!password.minLength()">{{$v.password.$params.minLength.min}} caractères min !.</span>
     </div>
     </div>
     
     <button class="btn btn-dark btn-sm" type="submit" v-on:click="checkForm()">S'inscrire</button>
     </form>
     
+</div>
 </div>
 </template>
 

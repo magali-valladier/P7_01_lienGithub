@@ -1,18 +1,28 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
-
-const Comment = sequelize.define('Comment', {
-  // Model attributes are defined here
-  content: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
-}, {
-   date_heure: {
-       type: DataTypes.DATETIME,
-       allowNull: false
-   }
-});
-
-// `sequelize.define` also returns the model
-console.log(Comment === sequelize.models.Comment); // true
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Comment extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      models.Comment.belongsTo(models.User, {
+        foreignKey: {
+        allowNull: false
+      }
+      })
+    }
+  };
+  Comment.init({
+    idUSERS: DataTypes.INTEGER,
+    content: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Comment',
+  });
+  return Comment;
+};
