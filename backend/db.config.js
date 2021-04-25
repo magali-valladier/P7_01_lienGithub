@@ -9,7 +9,9 @@ const db = mysql.createConnection({
  
     password: 'root',
 
-    database: 'groupomania'
+    database: 'groupomania',
+
+    dialect: "mysql"
  
   });
   db.connect(function(err) {
