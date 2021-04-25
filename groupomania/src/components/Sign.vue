@@ -10,7 +10,7 @@
 
     <div class="form-group form-group-sm" :class="{ 'form-group--error': $v.pseudo.$error }">
     <div class="col-sm-4 mx-auto">
-        <label for="name">Pseudo</label>
+        <label for="pseudo">Pseudo</label>
     <div class="input-group">
         <span class="input-group-addon bg-info">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -18,7 +18,7 @@
 </svg></span>
         <input
             id="pseudo"
-            name="name"
+            name="pseudo"
             type="text"
             class="form-control form-control-sm"
             v-model.trim="$v.pseudo.$model"
@@ -109,7 +109,7 @@ methods:{
   async signup() {
         this.submited = true;
         if (this.pseudo && this.email && this.password) {
-     await   axios.post( "http://localhost:8080/signup", {
+     await   axios.post( 'http://localhost:8080/api/auth/signup', {
               pseudo: this.pseudo,
               email: this.email,
               password: this.password
@@ -120,7 +120,7 @@ methods:{
               this.$router.push("/");
           })
           .catch(error => {
-              console.log(error.status);
+              console.log(error);
           })
             }   
         }

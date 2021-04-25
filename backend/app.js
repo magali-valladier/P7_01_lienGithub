@@ -6,9 +6,7 @@ const helmet = require('helmet');
 const rateLimit = require("express-rate-limit");
 const postsRoutes = require("./routes/posts");
 const userRoutes = require("./routes/user");
-const mysql = require('mysql');
-const { Sequelize } = require('sequelize');
-const axios = require('axios');
+const commentsRoutes = require ("./routes/comments");
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,39 +15,14 @@ app.use((req, res, next) => {
     next();
   });
 
-  const db = mysql.createConnection({
-
-    host: 'localhost',
- 
-    user: 'root',
- 
-    password: 'root',
-
-    database: 'groupomania'
- 
-  });
-  db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connecté à la base de données MySQL!");
-  });
-
-  const sequelize = new Sequelize("Groupomania", "root", "root", {
-    dialect: "mysql",
-    host: "localhost"
-});
-
-try {
-  sequelize.authenticate();
-  console.log('Connecté à la base de données MySQL!');
-} catch (error) {
-  console.error('Impossible de se connecter, erreur suivante :', error);
-}
+  
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 app.use('/api/posts', postsRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/api/comments', commentsRoutes);
   //input sanitization against XXS attacks(helmet also does the same in this package)
 app.use(xss());
 
