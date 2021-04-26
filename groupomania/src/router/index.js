@@ -12,15 +12,15 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
+    path: '/signup',
+    name: 'Signup',
+    component: () => import('../views/Signup.vue')
+  },
+  {
     path: '/post',
     name: 'Post',
     component: () => import('../views/Post.vue')
-  },
-  {
-    path: '/signin',
-    name: 'Signin',
-    component: () => import('../views/Signin.vue')
-  },
+  }  
 ]
 
 const router = new VueRouter({

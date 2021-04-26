@@ -1,5 +1,5 @@
 <template>
-  <div class="signin">
+  <div class="signup">
    
   <Navbar />
   <Sign />
@@ -14,7 +14,7 @@ import Footer from '@/components/Footer.vue'
 
 
 export default {
-  name: 'Signin', 
+  name: 'Signup', 
   components: {
   Navbar, Sign, Footer    
 }

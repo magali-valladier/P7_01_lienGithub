@@ -1,7 +1,7 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const bcrypt = require("bcrypt");
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -29,9 +29,19 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
    
-  }, {
+  },
+  {
     sequelize,
-    modelName: 'Users',
+  },
+  
+  {
+    classMethods: {
+    generateHash: function (password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    }
+  }   
   });
-  return Users;
-};
+  
+  
+return Users;
+}

@@ -1,29 +1,32 @@
 const bcrypt = require("bcrypt");
-const fs = require('fs');
-const db = require("../models/index.js");
-
+const db = require("../models/index");
 const MaskData = require("maskdata");
 const jwt = require('jsonwebtoken');
+const Users = db.user
 
 exports.signup = (req, res, next) => {
-//Chiffre le mot de passe de l'utilisateur, ajoute l'utilisateur à la base de données
-
-const Users = db.Users;
+Users.create({
+  pseudo: req.body.pseudo,
+  email: MaskData.maskEmail2(req.body.email),
+  password: hash
+})
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
-        const user = new Users ({
+        const user = new User({
          pseudo: req.body.pseudo,
          email: MaskData.maskEmail2(req.body.email),
          password: hash
         });
+        
         user.save() 
           .then(user => res.status(201).json( user ))
           .catch(error => res.status(400).json({ error }));
       })
       .catch(error => res.status(500).json({ error }));
+      console.log(user);
 };
 
-exports.login = (req, res, next) => {
+/*exports.login = (req, res, next) => {
 
   const Users = db.Users;
 
@@ -53,4 +56,4 @@ exports.login = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
     })
     .catch(error => res.status(500).json({ error }));
-};
+};*/

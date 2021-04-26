@@ -71,7 +71,7 @@
     </div>
     </div>
     
-    <button class="btn btn-dark btn-sm" type="submit" @click="signup()">S'inscrire</button>
+    <button class="btn btn-dark btn-sm" type="submit" @click.prevent="signup">S'inscrire</button>
     </form>
     
 </div>
@@ -84,12 +84,13 @@ import {required, minLength, email} from "vuelidate/lib/validators";
 import axios from "axios";
 
 export default {
-name: 'Sign',
+name: 'signup',
 data() {
     return {
     pseudo: "",
     email: "",
-    password: ""
+    password: "",
+    submited: false,
     }
 },
 validations: {
@@ -106,10 +107,11 @@ validations: {
     }
 },
 methods:{
-  async signup() {
+ signup() {
+      this.$v.$touch();
         this.submited = true;
         if (this.pseudo && this.email && this.password) {
-     await   axios.post( 'http://localhost:8080/api/auth/signup', {
+    axios.post( 'http://127.0.0.1:3000/api/auth/signup', {
               pseudo: this.pseudo,
               email: this.email,
               password: this.password
@@ -117,10 +119,10 @@ methods:{
           .then(res => {
               console.log(res);
               alert("Merci ! Votre compte est bien crée");
-              this.$router.push("/");
+              location.href = "/";
           })
           .catch(error => {
-              console.log(error);
+              console.log("quelquechose s'est mal passé :(" + (error));
           })
             }   
         }

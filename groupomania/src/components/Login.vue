@@ -87,7 +87,7 @@ methods:{
         e.preventDefault();
     },
     goSignin(){
-        this.$router.push('Signin');
+        this.$router.push('Signup');
     }
 }
 } 
