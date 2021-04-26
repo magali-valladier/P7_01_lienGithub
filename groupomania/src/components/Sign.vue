@@ -111,7 +111,7 @@ methods:{
       this.$v.$touch();
         this.submited = true;
         if (this.pseudo && this.email && this.password) {
-    axios.post( 'http://127.0.0.1:3000/api/auth/signup', {
+    axios.post( 'http://localhost:3000/api/auth/signup', {
               pseudo: this.pseudo,
               email: this.email,
               password: this.password
