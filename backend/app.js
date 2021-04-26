@@ -7,9 +7,10 @@ const rateLimit = require("express-rate-limit");
 const postsRoutes = require("./routes/posts");
 const userRoutes = require("./routes/user");
 const commentsRoutes = require ("./routes/comments");
-
+require('dotenv').config();
 const cors = require('cors');
-require("./db.config.js");
+
+require("./db.config");
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
