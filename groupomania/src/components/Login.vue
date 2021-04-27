@@ -3,11 +3,11 @@
     <h3 class="text-secondary">Me connecter</h3>
 
 <form id="form"
-    @submit.prevent="checkForm"
-    action="Post.vue"
+    @submit.prevent="login()"
     method="post"
     novalidate="true">
-        
+
+      
     <div class="form-group form-group-sm" :class="{ 'form-group--error': $v.email.$error }">
     <div class="col-sm-4 mx-auto">
         <label for="email">Email</label>
@@ -19,12 +19,12 @@
         <input
             id="email"
             name="email"
-            type="text"
+            type="email"
             class="form-control form-control-sm"
             v-model.trim="$v.email.$model"
             >
         </div>
-        <span class="error" v-if="!email.required">Champ email manquant</span>
+        <span class="error" v-if="!$v.email.required">Champ email manquant</span>
     </div>
     </div>
 
@@ -46,31 +46,37 @@
             v-model.trim="$v.password.$model"
            >
         </div>
-        <span class="error" v-if="!password.required">Champ mot de passe manquant</span> <br>
-        <span class="error" v-if="!password.minLength">{{$v.password.$params.minLength.min}} caractères min !.</span>
+        <span class="error" v-if="!$v.password.required">Champ mot de passe manquant</span> <br>
+        <span class="error" v-if="!$v.password.minLength">{{$v.password.$params.minLength.min}} caractères min !.</span>
     </div>
     </div>
     
-    <button class="btn btn-dark btn-sm" type="submit" v-on:click="checkForm()">Connexion</button>
+    <button class="btn btn-dark btn-sm" type="submit" @click.prevent="login">Connexion</button>
     </form>
     <p> Pas encore inscrit ? Créez votre compte dès aujourd'hui !</p>
-    <button class="btn btn-dark btn-sm" v-on:click="goSignin()" >Inscription</button>
+    <button class="btn btn-dark btn-sm" @click.prevent="goSignin" >Inscription</button>
 </div>
 </template>
 
 
 <script>
 import {required,minLength} from "vuelidate/lib/validators"; 
+import axios from "axios";
+
 
 export default {
-name: 'Login',
+name: 'login',
 data() {
     return {
+        
     email: "",
-    password: ""
-    }
-},
+    password: "",
+    submited: false,
+        }
+    },
+
 validations: {
+   
     email: {
         required,
     },
@@ -80,13 +86,30 @@ validations: {
     }
 },
 methods:{
-    checkForm: function (e) {
-        if (this.email && this.password) {
-            return true
-        }
-        e.preventDefault();
-    },
-    goSignin(){
+    login: function() {
+        this.$v.$touch();
+        this.submited = true;
+        axios.post( 'http://localhost:3000/api/auth/login', {
+             
+              email: this.email,
+              password: this.password
+          })
+         
+          .then(res => {
+              const token = res.data.token;
+              const userId= res.data.userId;
+              
+              localStorage.setItem("token", token),
+              localStorage.setItem("userId", userId),
+              console.log(this.email);
+              this.$router.push('Post');
+          })
+          .catch(error => {
+              console.log("Identifiants invalides !" + (error));
+          })
+        
+        },
+      goSignin(){
         this.$router.push('Signup');
     }
 }

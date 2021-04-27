@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = db.user;
 
 exports.signup = async (req, res, next) => {
-  console.log(req.body);
+  
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
      const user = {
@@ -23,11 +23,13 @@ exports.signup = async (req, res, next) => {
     }
 exports.login = (req, res, next) => {
 
-  const Users = db.Users;
+  const User = db.user;
 
-  Users.findOne({ 
+  User.findOne({ 
     where: { 
-      email: req.body.email 
+      
+      email:req.body.email,
+      
     }
   }) 
     .then(user => {
@@ -37,12 +39,13 @@ exports.login = (req, res, next) => {
       bcrypt.compare(req.body.password, user.password) 
         .then(valid => {
           if (!valid) {
-            return res.status(400).json({ error: 'Mot de passe incorrect !' });
+            return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
+          console.log(req.body.password);
           res.status(200).json({ 
-            user,
+            userId: user._id,
             token: jwt.sign(
-              { userId: user.id },
+              { userId: user._id },
               process.env.SECRET_TOKEN,
               { expiresIn: '24h' }
               )
