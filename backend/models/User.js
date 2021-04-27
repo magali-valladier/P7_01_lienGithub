@@ -1,47 +1,18 @@
-'use strict';
-const bcrypt = require("bcrypt");
-const { Model } = require('sequelize');
-
-module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      models.Users.hasMany(models.Post, {
-        foreignKey: {
-          name: 'idUSERS'
-        },
-      });
-      models.Users.hasMany(models.Comment, {
-        foreignKey: {
-          name: 'idUSERS'
-        },
-      });
+module.exports = (sequelize, Sequelize) => {
+  const User = sequelize.define("user", {
+    pseudo: {
+      type: Sequelize.STRING,
+      unique: true,
+    },
+    email: {
+      type: Sequelize.STRING,
+      unique: true
+    },
+    password: {
+      type: Sequelize.STRING,
     }
-  };
-  Users.init({
     
-    pseudo: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-   
-  },
-  {
-    sequelize,
-  },
-  
-  {
-    classMethods: {
-    generateHash: function (password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    }
-  }   
   });
-  
-  
-return Users;
-}
+
+  return User;
+};

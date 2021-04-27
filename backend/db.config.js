@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { Sequelize } = require('sequelize');
+const { Sequelize }  = require('sequelize');
 
 const db = mysql.createConnection({
 
@@ -30,3 +30,4 @@ try {
 } catch (error) {
   console.error('Impossible de se connecter, erreur suivante :', error);
 }
+
