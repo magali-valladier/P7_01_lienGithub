@@ -1,21 +1,22 @@
 <template>
-  <div class="post">
+  <div class="login">
    
   <Navbar />
-  <Post />
+  <Log />
   <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
-import Post from '@/components/Post.vue'
+import Log from '@/components/Log.vue'
 import Footer from '@/components/Footer.vue'
 
+
 export default {
-  name: 'Post', 
+  name: 'Login', 
   components: {
-  Navbar, Post, Footer    
+  Navbar, Log, Footer    
 }
 }
 </script>

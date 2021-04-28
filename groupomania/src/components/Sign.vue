@@ -86,14 +86,13 @@ import axios from "axios";
 export default {
 name: 'signup',
 data() {
-   return {
+    return {
     pseudo: "",
     email: "",
     password: "",
     submited: false,
     }
-   },
-
+},
 validations: {
     pseudo: {
         required,
@@ -112,9 +111,7 @@ methods:{
       this.$v.$touch();
         this.submited = true;
         if (this.pseudo && this.email && this.password) {
-        console.log(this.password);
-       
-  axios.post( 'http://localhost:3000/api/auth/signup', {
+    axios.post( 'http://localhost:3000/api/auth/signup', {
               pseudo: this.pseudo,
               email: this.email,
               password: this.password
@@ -122,7 +119,7 @@ methods:{
           .then(res => {
               console.log(res);
               alert("Merci ! Votre compte est bien crée");
-              location.href = "/";
+              location.href = "/login";
           })
           .catch(error => {
               console.log("quelquechose s'est mal passé :(" + (error));

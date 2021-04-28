@@ -1,3 +1,4 @@
+const mysql = require("mysql");
 const Post = require('../models/Post');
 const fs = require('fs');
 

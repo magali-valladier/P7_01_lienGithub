@@ -86,28 +86,30 @@ validations: {
     }
 },
 methods:{
-    login: function() {
+  
+    login() {
+        
         this.$v.$touch();
         this.submited = true;
+        
         axios.post( 'http://localhost:3000/api/auth/login', {
              
               email: this.email,
-              password: this.password
-          })
-         
-          .then(res => {
-              const token = res.data.token;
-              const userId= res.data.userId;
-              
-              localStorage.setItem("token", token),
-              localStorage.setItem("userId", userId),
-              console.log(this.email);
-              this.$router.push('Post');
-          })
+              password: this.password,
+           })
+    
+        .then((res) => {
+                localStorage.setItem("token",   res.data.token)
+                localStorage.setItem("userId",  res.data.userId)
+                console.log(res.data);
+                alert("Bienvenue ! Vous êtes connecté ! ");
+                this.$router.push('Post');             
+            })
+            
           .catch(error => {
               console.log("Identifiants invalides !" + (error));
           })
-        
+          
         },
       goSignin(){
         this.$router.push('Signup');
