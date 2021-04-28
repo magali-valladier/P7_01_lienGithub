@@ -22,28 +22,31 @@ exports.signup = async (req, res, next) => {
       
     }
     exports.login = (req, res, next) => {  
-
+      
       if ( !req.body.email && !req.body.password ) {
         return res.status(400).json({message: "champ manquant"})
     }
 
       User.findOne({
         where: {
-          email: req.body.email,
+          email: MaskData.maskEmail2(req.body.email),
         }
       })
         .then((user) => {
+          console.log(user);
           if (!user) {
             return res.status(401).json({ error: 'Utilisateur inconnu' });
           }
+          console.log(req.body);
           bcrypt.compare(req.body.password, user.password) 
             .then((valid) => {
               if (!valid) {
                 return res.status(401).json({ error: 'Utilisateur ou mot de passe erroné' });
               }
               res.status(200).json({
+                userId: user.id,
                 token: jwt.sign(
-                  { id: user.id }, 'RANDOM_TOKEN_SECRET',
+                  { userId: user.id }, 'RANDOM_TOKEN_SECRET',
                   { expiresIn: '24h' }),
                 });
               
