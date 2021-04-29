@@ -1,16 +1,21 @@
 // Import
-const auth = require('../middleware/auth');
-
 const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/user');
-const multer = require('../middleware/multer-config');
+const passValidate = require('../middleware/passValidate');
+const mailValidate = require('../middleware/mailValidate');
+const rateLimit = require("express-rate-limit");
 
+const rateLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, 
+  max: 5, // 
+  message: " Trop de tentatives échouées, réessayez dans 5 minutes",
+});
 
 
 // Routes
 
-router.post('/signup', multer, userCtrl.signup);
-router.post('/login', userCtrl.login);
+router.post('/signup', mailValidate, passValidate, userCtrl.signup);
+router.post('/login', rateLimiter, userCtrl.login);
 
 module.exports = router;

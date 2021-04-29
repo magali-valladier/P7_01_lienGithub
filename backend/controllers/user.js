@@ -6,6 +6,9 @@ const User = db.user;
 
 exports.signup = async (req, res, next) => {
   
+  if (pseudo == null || email == null || password == null) {
+    return res.status(400).json({ 'error': 'Merci de renseigner tous les champs !'});
+  }
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
      const user = {
