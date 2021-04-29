@@ -2,20 +2,20 @@
   <div class="post">
    
   <Navbar />
-  <Post />
+  <Posts />
   <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
-import Post from '@/components/Post.vue'
+import Posts from '@/components/Posts.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'Post', 
   components: {
-  Navbar, Post, Footer    
+  Navbar, Posts, Footer    
 }
 }
 </script>

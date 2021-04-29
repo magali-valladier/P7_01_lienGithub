@@ -89,9 +89,6 @@ methods:{
   
     login() {
         
-        this.$v.$touch();
-        this.submited = true;
-        
         axios.post( 'http://localhost:3000/api/auth/login', {
              
               email: this.email,
@@ -103,7 +100,7 @@ methods:{
                 localStorage.setItem("userId",  res.data.userId)
                 console.log(res.data);
                 alert("Bienvenue ! Vous êtes connecté ! ");
-                this.$router.push('Post');             
+                location.href = "/post";           
             })
             
           .catch(error => {
