@@ -26,6 +26,11 @@ const routes = [
     name: 'Post',
     component: () => import('../views/Post.vue')
   },  
+  {
+    path: '/post/:id',
+    name: 'SendPost',
+    component: () => import('../views/Post.vue')
+  }, 
 ]
 
 const router = new VueRouter({

@@ -91,6 +91,7 @@ data() {
     email: "",
     password: "",
     submited: false,
+    user: null,
     }
 },
 validations: {
@@ -117,6 +118,7 @@ methods:{
               password: this.password
           })
           .then(res => {
+              localStorage.setItem("pseudo", res.data.pseudo);
               console.log(res);
               alert("Merci ! Votre compte est bien crée");
               location.href = "/login";

@@ -1,7 +1,7 @@
 <template>
     <div class="Navbar">
 <b-navbar toggleable="lg" type="dark" variant="primary">
-    <img src="../assets/icon-left-font-monochrome-black.svg" href="/" aria-label="logo groupomania" fluid alt="Logo groupomania">
+    <img src="../assets/icon-left-font-monochrome-black.svg" href="/" aria-label="logo groupomania" img-fluid alt="Logo groupomania">
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
@@ -24,7 +24,7 @@
 <script>
 export default {
     name: 'Navbar',
-
+    user: false
 }
 </script>
 
