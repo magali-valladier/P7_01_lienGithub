@@ -25,5 +25,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.user = require("./User")(sequelize, Sequelize)
+db.post = require("./Post")(sequelize, Sequelize)
 
 module.exports = db;
