@@ -19,12 +19,12 @@
                                 <label class="sr-only" for="post">Créer un post</label>
                                 <textarea name="post" type="text" v-model="content" class="form-control border-0" id="post" rows="2" placeholder="Quoi de neuf aujourd'hui ?" required></textarea>
                             </div>
-                        </form>
-                    </div>
-                    <div v-else>
-                <h4>Post envoyé !</h4>
-                <button class="btn btn-success" @click="newPost">Add</button>
-                </div>
+                            </form>
+                            </div>
+                     <div class="col form-group mb-0" v-else>
+                      <label class="sr-only" for="post">Post</label>
+                    <textarea name="content" type="text" v-model="content" class="form-control border-0" id="post" rows="2" placeholder="Quoi de neuf aujourd'hui ?" required></textarea>
+                </div> 
                 </div>
             </div>
             <div class="card-footer p-2">
@@ -55,8 +55,7 @@ name: "create",
     return {
       pseudo: localStorage.getItem("pseudo"),
       content: "",
-      userId: localStorage.getItem("userId"),
-      submitStatus: null,
+     submitStatus: null,
     };
   },
 validations: {
@@ -67,25 +66,25 @@ validations: {
 },
 methods:{
 async create() {
+    this.$v.$touch();
+    this.submitStatus = true;
     const data = {
+        userId: localStorage.getItem("token"),
         content: this.content
     };
-
+//console.log(data);
+if (data) {
 await axios.post('http://localhost:3000/api/auth/post', data)
     .then(res => {
-        this.userId = localStorage.getItem("token");
-        this.post.id = res.data.id;
-        console.log(res.data);
-        this.submitStatus = true;
+        console.log(res);
+        alert("Bravo! Votre post est bien crée");
+        location.href = "/post";
     })
     .catch(e => {
         console.log(e);
     })
-},
-newPost() {
-    this.submitStatus = null;
-    this.post = {};
 }
+},
 }
 }
 	

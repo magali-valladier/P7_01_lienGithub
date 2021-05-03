@@ -18,8 +18,13 @@
                         method="POST"
                         >
                             <div class="form-group mb-0">
-                                <label class="sr-only" for="post">Post</label>
-                                <textarea name="content" type="text" v-model="content" class="form-control border-0" id="post" rows="2" required></textarea>
+                                <div>
+                                    <form>
+                                    <div class="form-group mb-0">
+                                    <div>{{ content }}</div>
+                                    </div>
+                                    </form>
+                            </div>
                             </div>
                         </form>
                     </div>

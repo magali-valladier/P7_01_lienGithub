@@ -21,14 +21,10 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
+    
   {
     path: '/post',
     name: 'Post',
-    component: () => import('../views/Post.vue')
-  },  
-  {
-    path: '/post/:id',
-    name: 'SendPost',
     component: () => import('../views/Post.vue')
   }, 
 ]
