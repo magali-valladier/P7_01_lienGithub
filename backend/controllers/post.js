@@ -11,14 +11,13 @@ if(content == null) {
 }
   const post= new Post({
     content: req.body.content,
-    idUSERS: req.body.idUSERS,
-    userId: req.body.userId
-    
+    userId: req.body.userId,
+        
 });
 console.log(post);
 //Enregistre le post dans la base de données
   Post.create(post)
-    .then(post => res.status(201).json({ "postId": post.id }, 'Post enregistré !'))
+    .then(post => res.status(201).json({ "postId": post.id }, { message: 'Post enregistré !'}))
     .catch(error => res.status(400).json({ error }));
 };
 

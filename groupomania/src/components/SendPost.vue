@@ -74,7 +74,7 @@ async create() {
     };
 //console.log(data);
 if (data) {
-await axios.post('http://localhost:3000/api/auth/post', data)
+await axios.post('http://localhost:3000/api/post', data)
     .then(res => {
         console.log(res);
         alert("Bravo! Votre post est bien crée");
