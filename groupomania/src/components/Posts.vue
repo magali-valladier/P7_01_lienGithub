@@ -21,7 +21,9 @@
                                 <div>
                                     <form>
                                     <div class="form-group mb-0">
-                                    <div>{{ content }}</div>
+                                    <div>
+                                        <p>{{ content }}</p>
+                                        </div>
                                     </div>
                                     </form>
                             </div>
@@ -30,11 +32,19 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group mb-0">
+                                <label class="sr-only" for="comment">Commenter</label>
+                                <input name="comment" type="text" class="form-control border-0" id="comment" rows="2" placeholder="Un commentaire ?" required>
+                            </div>
             <div class="card-footer p-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="col">
+                        <button type="button" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold" ><i class="fa fa-pencil" aria-hidden="true"></i>Commenter</button>
+                    </div>
+                    <div class="col">
                         <button type="button" @click.prevent="modifyPost" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold" ><i class="fa fa-pencil" aria-hidden="true"></i>Modifier</button>
                     </div>
+
 					<div class="col">
                         <button type="submit" @click.prevent="deletePost" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold">Supprimer</button>
                     </div>

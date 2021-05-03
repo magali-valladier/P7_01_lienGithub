@@ -68,20 +68,32 @@ methods:{
 async create() {
     this.$v.$touch();
     this.submitStatus = true;
+    let token = localStorage.getItem("token")
     const data = {
-        userId: localStorage.getItem("token"),
-        content: this.content
+        token: localStorage.getItem("token"),
+        content: this.content,
+        userId: localStorage.getItem("userId")
     };
-//console.log(data);
+console.log(token);
 if (data) {
-await axios.post('http://localhost:3000/api/post', data)
-    .then(res => {
-        console.log(res);
+ console.log(data);
+await axios.post('http://localhost:3000/api/auth/post', data, {
+    headers:   { 
+        'Content-Type': 'application/json',
+        'Authorization' : `Bearer ${token}`,
+        'Method': "POST"
+    }
+        })
+
+    .then(function (response) {
+        console.log(response);
+
         alert("Bravo! Votre post est bien crée");
-        location.href = "/post";
+   
     })
     .catch(e => {
         console.log(e);
+        console.log(data.token);
     })
 }
 },

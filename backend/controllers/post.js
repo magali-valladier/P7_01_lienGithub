@@ -4,7 +4,7 @@ const Post = db.post;
 
 exports.createPost = (req, res, next) => {
 // Analyse le post en utilisant une chaîne de caractères
-if(content == null) {
+if(req.body.content == null) {
   return res.status(400).send({
     message: "Votre message ne peut pas être vide"
   });
@@ -14,11 +14,11 @@ if(content == null) {
     userId: req.body.userId,
         
 });
-console.log(post);
+console.log(req.body);
 //Enregistre le post dans la base de données
-  Post.create(post)
+ Post.create(post)
     .then(post => res.status(201).json({ "postId": post.id }, { message: 'Post enregistré !'}))
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => res.status(400).json({ message: "erreur post controller"} ));
 };
 
 exports.modifyPost = (req, res, next) => {
