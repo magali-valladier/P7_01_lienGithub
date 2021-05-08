@@ -100,7 +100,7 @@ methods:{
                 localStorage.setItem("userId",  res.data.userId)
                 console.log(res.data);
                 alert("Bienvenue ! Vous êtes connecté ! ");
-                location.href = "/post";           
+                location.href = "/post/:id";           
             })
             
           .catch(error => {

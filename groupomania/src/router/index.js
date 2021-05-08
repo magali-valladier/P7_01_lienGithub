@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,9 +19,18 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
-    
   {
     path: '/post',
+    name: 'AllPost',
+    component: () => import('../views/AllPost.vue')
+  }, 
+  {
+    path: '/post/:id',
+    name: 'AddPost',
+    component: () => import('../views/AddPost.vue')
+  }, 
+  {
+    path: '/post/:id',
     name: 'Post',
     component: () => import('../views/Post.vue')
   }, 

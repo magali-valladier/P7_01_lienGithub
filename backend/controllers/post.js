@@ -16,38 +16,79 @@ if(req.body.content == null) {
 });
 console.log(req.body);
 //Enregistre le post dans la base de données
- Post.create(post)
-    .then(post => res.status(201).json({ "postId": post.id }, { message: 'Post enregistré !'}))
+ Post.createPost(post)
+    .then(()=> res.status(201).json({ message: 'Post enregistré !'}))
     .catch(error => res.status(400).json({ message: "erreur post controller"} ));
 };
 
+exports.findAll = (req,res) => {
+  const content = req.query.content;
+ 
+  Post.findAll.then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: err.message || "Une erreur s'est produite lors de la récupération"
+    });
+  });
+};
+
+exports.findOne = (req, res, next) => {
+  const id = req.params.id;
+
+  Post.findById(id)
+  .then(data => {
+    if (!data)
+    res.status(404).send({ message: "Post non trouvé avec l'id" + id});
+    else res.send(data);
+  })
+  .catch(err => {
+    res
+    .status(500)
+    .send({ message: "Impossible de générer le post avec l'id" +id});
+  });
+};
 exports.modifyPost = (req, res, next) => {
- const postModif = {};
-if(!req.body.content) {
+ 
+if(!req.body) {
   return res.status(400).send({
     message: "Votre message ne peut pas être vide"
   });
-}else {
-  postModif["content"] = req.body.content;
 }
-const query = content ? { content: { [Op.like]: `%${content}%` } } : null;
-Post.update(
-  postModif,
-  {
-    where: query
-  }
-)
-  .then((data) => res.status(200).json({data, message: 'Post modifié !'}))
-  .catch(error => res.status(400).json({ error }));
-};
-  
-exports.deletePost = (req, res, next) => {
-// Supprime le post avec l'ID fourni.
 
-  const id = req.body.id;
-  console.log(req.body);
-  Post.destroy({ where: { id:id }})
-  .then(() => res.status(200).json({ message: 'Post supprimé !' }))
-  .catch(error => res.status(500).json({ error }));
+const id = req.params.id;
+
+Post.findByIdAndUpdate(id, req.body, { useFindAndModufy: false })
+.then(data => {
+  if (!data) {
+    res.status(404).send({
+      message: `Impossible de modifier le post avec id=${id}`
+    });
+  }else res.send({ message: "Post modifié avec succes ! "});
+})
+.catch(err => {
+  res.status(500).send({ message: "Erreur avec la modification ud post avec l'id" + id });
+});
+};
+exports.deletePost = (req, res, next) => {
+
+  const id = req.params.id;
+  
+  Post.findByIdAndRemove(id)
+  .then(data => {
+    if (!data) {
+      res.status(404).send({
+        message: `Impossible de suprimer le post avec l'id=${id}`
+      });
+    }else {
+      res.send({ message: "Post supprimé avec succes !"});
+    }
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Impossible de trouver le post à supprimer avec l'id" + id
+    });
+  })
   };
   

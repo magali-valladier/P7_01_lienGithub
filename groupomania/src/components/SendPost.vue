@@ -6,25 +6,21 @@
         <div class="col-lg-8 mx-auto">
 			<div class="card my-3 bg-primary mx-auto">
                 <div class="card-header">
-					<div>
-                        <img class="rounded-circle" width="50" src="https://picsum.photos/80/80/?random?image=4">
-                    </div>
-                    <p class="text-white">{{ pseudo }}</p>
+					<p class="text-white"> {{ post.pseudo }}</p>
                 </div>
             <div class="card-body py-2">
                 <div class="d-flex">
-                    <div class="col" v-if="!create">
+                    <div class="col">
                         <form @submit.prevent="create">
                             <div class="form-group mb-0">
                                 <label class="sr-only" for="post">Créer un post</label>
-                                <textarea name="post" type="text" v-model="content" class="form-control border-0" id="post" rows="2" placeholder="Quoi de neuf aujourd'hui ?" required></textarea>
+                                <textarea name="post" type="text" v-model="post" class="form-control border-0" id="post" rows="2" placeholder="Quoi de neuf aujourd'hui ?" required></textarea>
                             </div>
-                            </form>
-                            </div>
-                     <div class="col form-group mb-0" v-else>
-                      <label class="sr-only" for="post">Post</label>
-                    <textarea name="content" type="text" v-model="content" class="form-control border-0" id="post" rows="2" placeholder="Quoi de neuf aujourd'hui ?" required></textarea>
-                </div> 
+                        </form>
+                            <div class="col">
+                        <button type="submit" @click.prevent="create" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Envoyer</button>
+                    </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer p-2">
@@ -32,9 +28,7 @@
                     <div class="col">
                         <button type="button" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold" ><i class="fa fa-picture-o" aria-hidden="true"></i>Ajouter un media</button>
                     </div>
-					<div class="col">
-                        <button type="submit" @click.prevent="create" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Envoyer</button>
-                    </div>
+					
                 </div>
                 
             </div>
@@ -53,11 +47,15 @@ export default {
 name: "create",
   data() {
     return {
+      post: {
       pseudo: localStorage.getItem("pseudo"),
       content: "",
+        },
+       
      submitStatus: null,
     };
   },
+ 
 validations: {
     content: {
         required,
@@ -65,41 +63,33 @@ validations: {
     }
 },
 methods:{
-async create() {
-    this.$v.$touch();
-    this.submitStatus = true;
-    let token = localStorage.getItem("token")
+create() {
+    
     const data = {
         token: localStorage.getItem("token"),
         content: this.content,
+        pseudo: localStorage.getItem("pseudo"),
         userId: localStorage.getItem("userId")
     };
-console.log(token);
-if (data) {
- console.log(data);
-await axios.post('http://localhost:3000/api/auth/post', data, {
+
+axios.post('http://localhost:3000/api/auth/post', data, {
     headers:   { 
-        'Content-Type': 'application/json',
-        'Authorization' : `Bearer ${token}`,
-        'Method': "POST"
+        Authorization: "Bearer" + localStorage.getItem("token")
     }
         })
-
-    .then(function (response) {
-        console.log(response);
-
-        alert("Bravo! Votre post est bien crée");
-   
-    })
-    .catch(e => {
+.then(response => {
+    this.post.id = response.data.id;
+    alert("Bravo! Votre post est bien crée");
+    this.submitStatus = true;
+})
+.catch(e => {
         console.log(e);
-        console.log(data.token);
-    })
-}
-},
+});
 }
 }
-	
+}
+
+
 </script>
 
 <style scoped>

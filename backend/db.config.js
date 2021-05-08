@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const { Sequelize }  = require('sequelize');
 require('dotenv').config();
 
-const db = mysql.createConnection({
+const sequelize = new Sequelize({
 
     host: 'DB_HOST',
  
@@ -16,7 +16,7 @@ const db = mysql.createConnection({
  
   });
   
-
+  const db = {};
 try {
   db;
   console.log('Connecté à la base de données MySQL!');
@@ -24,3 +24,5 @@ try {
   console.error('Impossible de se connecter, erreur suivante :', error);
 }
 
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
