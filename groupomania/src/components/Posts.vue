@@ -6,11 +6,16 @@
         <div v-if="post" class="col-lg-8 mx-auto jumbotron">
 			<div class="card my-3 bg-primary mx-auto">
             <ul>
-                <li> {{ userId.pseudo }} </li>
-                <li> {{ post.content }} </li>
+                <li> {{ post }} </li>
             </ul>
             </div>
+            <div class="col">
+                        <button type="submit" @click.prevent="" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Modifier</button>
+                    </div>
 		</div>
+        <div class="col">
+                        <button type="submit" @click.prevent="" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Supprimer</button>
+                    </div>
 	</div>
 </div>
 </div>
@@ -24,30 +29,21 @@ export default {
   name: "post",
   data() {
     return {
-      
       token: localStorage.getItem("token"),
-      post: [],
+      posts: [],
       pseudo: localStorage.getItem("pseudo"),
-      content: "",
-        
+             
     };
   },
-
+created(){ 
+    axios.get('http://localhost:3000/api/auth/post', {
+        headers: {
+            Authorization: "Bearer" + localStorage.getItem("token")
+        }
+    }) 
+},
 methods: {
-    getAllPost() {
-        const data = {
-         token: localStorage.getItem("token"),
-      post: [],
-      pseudo: localStorage.getItem("pseudo"),
-      content: "",
-    };
-axios.get('http://localhost:3000/api/auth/post' , data, {
-    headers:   { 
-        Authorization: "Bearer" + localStorage.getItem("token")
-    }})
-    .then(response => response.json())
-    .then(data => this.posts = data)
-    }
+   
 }
 }
 </script>

@@ -22,9 +22,9 @@ console.log(req.body);
 };
 
 exports.findAll = (req,res) => {
-  const content = req.query.content;
- 
-  Post.findAll.then(data => {
+   
+  Post.findAll
+  .then(data => {
     res.send(data);
   })
   .catch(err => {
