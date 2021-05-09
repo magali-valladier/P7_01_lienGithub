@@ -23,15 +23,6 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer p-2">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="col">
-                        <button type="button" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold" ><i class="fa fa-picture-o" aria-hidden="true"></i>Ajouter un media</button>
-                    </div>
-					
-                </div>
-                
-            </div>
         </div>
 		</div>
 	</div>
@@ -74,7 +65,8 @@ create() {
 
 axios.post('http://localhost:3000/api/auth/post', data, {
     headers:   { 
-        Authorization: "Bearer" + localStorage.getItem("token")
+        Authorization: "Bearer" + localStorage.getItem("token"),
+        "Content-Type": "application/json",
     }
         })
 .then(response => {

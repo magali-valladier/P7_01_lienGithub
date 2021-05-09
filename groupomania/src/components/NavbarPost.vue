@@ -1,8 +1,8 @@
 <template>
     <div class="Navbar">
 <b-navbar toggleable="lg" type="dark" variant="primary">
-    <img src="../assets/icon-left-font-monochrome-black.svg" href="/" aria-label="logo groupomania" img-fluid alt="Logo groupomania">
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    <a href="/"><img src="../assets/icon-left-font-monochrome-black.svg" aria-label="logo groupomania" img-fluid alt="Logo groupomania">
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle></a>
 
     <b-collapse id="nav-collapse" is-nav>
     <b-navbar-nav class="ml-auto">

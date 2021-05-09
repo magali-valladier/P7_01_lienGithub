@@ -1,5 +1,4 @@
 const db = require ("../models/index");
-const Op = db.Sequelize.Op;
 const Post = db.post;
 
 exports.createPost = (req, res, next) => {
@@ -9,21 +8,21 @@ if(req.body.content == null) {
     message: "Votre message ne peut pas être vide"
   });
 }
-  const post= new Post({
+  const post= {
     content: req.body.content,
     userId: req.body.userId,
-        
-});
+    token: localStorage.getItem("token")   
+};
 console.log(req.body);
 //Enregistre le post dans la base de données
  Post.createPost(post)
     .then(()=> res.status(201).json({ message: 'Post enregistré !'}))
-    .catch(error => res.status(400).json({ message: "erreur post controller"} ));
+    .catch(() => res.status(400).json({ message: "erreur post controller"} ));
 };
 
 exports.findAll = (req,res) => {
    
-  Post.findAll
+  Post.findAll()
   .then(data => {
     res.send(data);
   })
@@ -34,21 +33,6 @@ exports.findAll = (req,res) => {
   });
 };
 
-exports.findOne = (req, res, next) => {
-  const id = req.params.id;
-
-  Post.findById(id)
-  .then(data => {
-    if (!data)
-    res.status(404).send({ message: "Post non trouvé avec l'id" + id});
-    else res.send(data);
-  })
-  .catch(err => {
-    res
-    .status(500)
-    .send({ message: "Impossible de générer le post avec l'id" +id});
-  });
-};
 exports.modifyPost = (req, res, next) => {
  
 if(!req.body) {
@@ -59,7 +43,7 @@ if(!req.body) {
 
 const id = req.params.id;
 
-Post.findByIdAndUpdate(id, req.body, { useFindAndModufy: false })
+Post.modifyPost(id, req.body)
 .then(data => {
   if (!data) {
     res.status(404).send({
@@ -75,7 +59,7 @@ exports.deletePost = (req, res, next) => {
 
   const id = req.params.id;
   
-  Post.findByIdAndRemove(id)
+  Post.deletePost(id)
   .then(data => {
     if (!data) {
       res.status(404).send({

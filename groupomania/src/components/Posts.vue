@@ -43,7 +43,14 @@ created(){
     }) 
 },
 methods: {
-   
+   getPost(){
+        axios.get('http://localhost:3000/api/auth/post', {
+        headers: {
+            Authorization: "Bearer" + localStorage.getItem("token")
+        },
+      })
+    
+   }
 }
 }
 </script>
