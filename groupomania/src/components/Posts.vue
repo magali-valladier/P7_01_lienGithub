@@ -48,8 +48,12 @@ methods: {
         headers: {
             Authorization: "Bearer" + localStorage.getItem("token")
         },
+        
       })
-    
+    .then((response) => {
+        this.posts = response.data;
+        console.log(this.posts);
+    })
    }
 }
 }

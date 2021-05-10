@@ -13,9 +13,11 @@ const sequelize = new Sequelize({
     database: 'groupomania',
 
     dialect: "mysql"
- 
+
   });
-  
+ 
+    
+
   const db = {};
 try {
   db;
