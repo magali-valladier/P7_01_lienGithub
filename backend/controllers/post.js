@@ -1,5 +1,6 @@
 const db = require ("../models/index");
 const Post = db.post;
+const User = db.user;
 
 exports.createPost = (req, res, next) => {
 // Analyse le post en utilisant une chaîne de caractères
@@ -8,14 +9,15 @@ if(req.body.content == null) {
     message: "Votre message ne peut pas être vide"
   });
 }
+  const user = User;
   const post= {
     content: req.body.content,
-    userId: req.body.userId,
+    userId: user.id,
     token: localStorage.getItem("token")   
 };
-console.log(req.body);
+console.log(post);
 //Enregistre le post dans la base de données
- Post.createPost(post)
+ Post.create(post, user)
     .then(()=> res.status(201).json({ message: 'Post enregistré !'}))
     .catch(() => res.status(400).json({ message: "erreur post controller"} ));
 };

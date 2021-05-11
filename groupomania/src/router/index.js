@@ -20,12 +20,12 @@ const routes = [
     component: () => import('../views/Login.vue')
   },
   {
-    path: '/post',
+    path: '/allpost',
     name: 'AllPost',
     component: () => import('../views/AllPost.vue')
   }, 
   {
-    path: '/post/:id',
+    path: '/post/create',
     name: 'AddPost',
     component: () => import('../views/AddPost.vue')
   }, 

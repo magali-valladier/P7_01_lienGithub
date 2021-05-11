@@ -27,7 +27,25 @@
         <span class="error" v-if="!$v.email.required">Champ email manquant</span>
     </div>
     </div>
-
+<div class="form-group form-group-sm" :class="{ 'form-group--error': $v.pseudo.$error }">
+    <div class="col-sm-4 mx-auto">
+        <label for="pseudo">Pseudo</label>
+    <div class="input-group">
+        <span class="input-group-addon bg-info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+</svg></span>
+        <input
+            id="pseudo"
+            name="pseudo"
+            type="text"
+            class="form-control form-control-sm"
+            v-model.trim="$v.pseudo.$model"
+            >
+        </div>
+        <span class="error" v-if="!$v.pseudo.required">Pseudo manquant</span>
+    </div>
+    </div>
     <div class="form-group form-group-sm" :class="{ 'form-group--error': $v.password.$error }">
     <div class="col-sm-4 mx-auto">
         <label for="password">Mot de passe</label>
@@ -68,7 +86,7 @@ export default {
 name: 'login',
 data() {
     return {
-        
+    pseudo: "",   
     email: "",
     password: "",
     submited: false,
@@ -76,7 +94,9 @@ data() {
     },
 
 validations: {
-   
+   pseudo: {
+        required,
+    },
     email: {
         required,
     },
@@ -90,17 +110,18 @@ methods:{
     login() {
         
         axios.post( 'http://localhost:3000/api/auth/login', {
-             
+              pseudo: this.pseudo,
               email: this.email,
               password: this.password,
            })
     
         .then((res) => {
                 localStorage.setItem("token",   res.data.token)
+                localStorage.setItem("pseudo",   res.data.pseudo)
                 localStorage.setItem("userId",  res.data.userId)
                 console.log(res.data);
                 alert("Bienvenue ! Vous êtes connecté ! ");
-                location.href = "/post/:id";           
+                this.$router.push("/post/create");           
             })
             
           .catch(error => {

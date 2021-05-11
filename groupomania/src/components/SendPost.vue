@@ -6,15 +6,15 @@
         <div class="col-lg-8 mx-auto">
 			<div class="card my-3 bg-primary mx-auto">
                 <div class="card-header">
-					<p class="text-white"> {{ post.pseudo }}</p>
+					<p class="text-white"> {{ pseudo }}</p>
                 </div>
             <div class="card-body py-2">
                 <div class="d-flex">
                     <div class="col">
                         <form @submit.prevent="create">
                             <div class="form-group mb-0">
-                                <label class="sr-only" for="post">Créer un post</label>
-                                <textarea name="post" type="text" v-model="post" class="form-control border-0" id="post" rows="2" placeholder="Quoi de neuf aujourd'hui ?" required></textarea>
+                                <label class="sr-only" for="content">Créer un post</label>
+                                <textarea name="content" type="text" v-model="content" class="form-control border-0" id="content" rows="2" placeholder="Quoi de neuf aujourd'hui ?" required></textarea>
                             </div>
                         </form>
                             <div class="col">
@@ -35,15 +35,14 @@ import {required, maxLength,} from "vuelidate/lib/validators";
 import axios from "axios";
 
 export default {
-name: "create",
+name: "sendPost",
   data() {
     return {
-      post: {
+      
+      userId: "",
       pseudo: localStorage.getItem("pseudo"),
       content: "",
-        },
-       
-     submitStatus: null,
+      token: ""
     };
   },
  
@@ -56,26 +55,26 @@ validations: {
 methods:{
 create() {
     
-    const data = {
-        token: localStorage.getItem("token"),
+    const post = {
+        
         content: this.content,
-        pseudo: localStorage.getItem("pseudo"),
         userId: localStorage.getItem("userId")
     };
-
-axios.post('http://localhost:3000/api/auth/post', data, {
+//console.log(post);
+axios.post('http://localhost:3000/api/auth/post', post, {
     headers:   { 
         Authorization: "Bearer" + localStorage.getItem("token"),
         "Content-Type": "application/json",
     }
         })
-.then(response => {
-    this.post.id = response.data.id;
+.then((post) => {
+    
     alert("Bravo! Votre post est bien crée");
-    this.submitStatus = true;
+    this.$router.push('AllPost');
+    console.log(post);
 })
 .catch(e => {
-        console.log(e);
+        console.log(e + "Impossible d'éditer le post, une erreur est survenue");
 });
 }
 }
