@@ -1,9 +1,9 @@
 const db = require ("../models/index");
-const Post = db.Post;
+const Post = db.post;
 const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
-
+// Analyse le post en utilisant une chaîne de caractères
 if(req.body.content == null) {
   return res.status(400).send({
     message: "Votre message ne peut pas être vide"
@@ -17,17 +17,10 @@ const userId = decodedToken.userId;
     userId: userId,
     
 };
-const User = db.User;
-
-    User.findOne({
-        where: {
-            id: userId
-        }
-    })
 console.log(post);
 //Enregistre le post dans la base de données
- Post.create(post)
-    .then(() => res.status(201).json({ message: 'Post enregistré !'}))
+ Post.create(post, user)
+    .then(()=> res.status(201).json({ message: 'Post enregistré !'}))
     .catch(() => res.status(400).json({ message: "erreur post controller"} ));
 };
 
