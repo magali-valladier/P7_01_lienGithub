@@ -52,17 +52,17 @@ validations: {
 methods:{
 create() {
     
-const data = JSON.stringify({
+const data = {
     userId: localStorage.getItem('userId'),
     content: this.content
-})
+}
 console.log(data);
 
 axios.post('http://localhost:3000/api/auth/post', 
       {
         headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
         },
          data: data     
       })

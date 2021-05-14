@@ -121,7 +121,7 @@ methods:{
               localStorage.setItem("pseudo", res.data.pseudo);
               console.log(res);
               alert("Merci ! Votre compte est bien crée");
-              location.href = "/login";
+              this.$router.push('Login');
           })
           .catch(error => {
               console.log("quelquechose s'est mal passé :(" + (error));

@@ -10,16 +10,16 @@ if(req.body.content == null) {
   });
 }
 const token = req.headers.authorization.split(' ')[1];
-const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
-const userId = decodedToken.userId;
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const userId = decodedToken.userId;
   const post= {
     content: req.body.content,
-    userId: userId,
+    userId: req.body.userId,
     
 };
 console.log(post);
 //Enregistre le post dans la base de données
- Post.create(post, user)
+ Post.create(post)
     .then(()=> res.status(201).json({ message: 'Post enregistré !'}))
     .catch(() => res.status(400).json({ message: "erreur post controller"} ));
 };
