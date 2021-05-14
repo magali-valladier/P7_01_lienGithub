@@ -1,24 +1,33 @@
 const db = require ("../models/index");
-const Post = db.post;
-const User = db.user;
+const Post = db.Post;
+const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
-// Analyse le post en utilisant une chaîne de caractères
+
 if(req.body.content == null) {
   return res.status(400).send({
     message: "Votre message ne peut pas être vide"
   });
 }
-  const user = User;
+const token = req.headers.authorization.split(' ')[1];
+const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
+const userId = decodedToken.userId;
   const post= {
     content: req.body.content,
-    userId: user.id,
-    token: localStorage.getItem("token")   
+    userId: userId,
+    
 };
+const User = db.User;
+
+    User.findOne({
+        where: {
+            id: userId
+        }
+    })
 console.log(post);
 //Enregistre le post dans la base de données
- Post.create(post, user)
-    .then(()=> res.status(201).json({ message: 'Post enregistré !'}))
+ Post.create(post)
+    .then(() => res.status(201).json({ message: 'Post enregistré !'}))
     .catch(() => res.status(400).json({ message: "erreur post controller"} ));
 };
 

@@ -1,18 +1,19 @@
 <template>
 <div>
-<div class="col-lg-7 offset-lg-3 mx-auto">
+<div class="col-lg-7 offset-lg-3 mx-auto my-5">
     <h2>Tous les posts</h2>
-    <div class="row mx-auto"  v-for="post in posts" :key="post.id">
+    <div class="row mx-auto my-5" v-for="post in posts" :key="post.id">
         <div class="col-lg-8 mx-auto bg-primary ">
 			<div class="card my-3 mx-auto">
                 {{ post.content }} 
             </div>
-            <div class="col">
-                        <button type="submit" @click.prevent="" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Modifier</button>
+            <div class="form-group ">
+                <div class="my-2">
+                        <button type="submit" @click.prevent="" class="btn btn-fposts btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Modifier</button>
+                        </div>
+                        <div>
+                        <button type="submit" @click.prevent="" class="btn btn-fposts btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Supprimer</button>                   
                     </div>
-		
-        <div class="col">
-                        <button type="submit" @click.prevent="" class="btn btn-fposts btn-block btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Supprimer</button>
                     </div>
                     </div>
 	</div>

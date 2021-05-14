@@ -1,5 +1,5 @@
 <template>
-    <div class="footer bg-white font-weight-bold text-secondary">
+    <div class="footer bg-gray font-weight-bold text-secondary">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">

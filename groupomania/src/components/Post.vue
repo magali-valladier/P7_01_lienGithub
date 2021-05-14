@@ -1,10 +1,10 @@
 <template>
 <div>
 		
-<div class="col-lg-7 offset-lg-3 mx-auto">
-    <div class="row mx-auto">
-        <div class="col-lg-8 mx-auto">
-			<div class="card my-3 bg-primary mx-auto">
+<div class="col-lg-7 offset-lg-3 mx-auto mt-5 mb-5">
+    <div class="row mx-auto mt-5">
+        <div class="col-lg-8 mx-auto mt-5 mb-5">
+			<div class="card mt-5 bg-primary mx-auto mb-5">
                 <div class="card-header">
 					<p class="text-white"> {{ post.pseudo }}</p>
                 </div>

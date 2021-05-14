@@ -110,8 +110,9 @@ methods:{
     login() {
         
         axios.post( 'http://localhost:3000/api/auth/login', {
-              pseudo: this.pseudo,
+              
               email: this.email,
+              pseudo: this.pseudo,
               password: this.password,
            })
     
@@ -121,7 +122,7 @@ methods:{
                 localStorage.setItem("userId",  res.data.userId)
                 console.log(res.data);
                 alert("Bienvenue ! Vous êtes connecté ! ");
-                this.$router.push("/post/create");           
+                this.$router.push('AddPost');           
             })
             
           .catch(error => {
