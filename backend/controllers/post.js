@@ -1,21 +1,19 @@
 const db = require ("../models/index");
 const Post = db.post;
-const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 exports.createPost = (req, res, next) => {
 // Analyse le post en utilisant une chaîne de caractères
 if(req.body.content == null) {
   return res.status(400).send({
-    message: "Votre message ne peut pas être vide"
+    message: "Votre message createPost ne peut pas être vide"
   });
 }
-const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-    const userId = decodedToken.userId;
+
   const post= {
     content: req.body.content,
     userId: req.body.userId,
-    
+    image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
 };
 console.log(post);
 //Enregistre le post dans la base de données
@@ -41,7 +39,7 @@ exports.modifyPost = (req, res, next) => {
  
 if(!req.body) {
   return res.status(400).send({
-    message: "Votre message ne peut pas être vide"
+    message: "Votre message modifié ne peut pas être vide"
   });
 }
 

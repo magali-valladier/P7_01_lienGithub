@@ -6,18 +6,24 @@
         <div class="col-lg-8 mx-auto">
 			<div class="card my-3 bg-primary mx-auto">
                 <div class="card-header">
-					<p class="text-white"> Post</p>
+					<h1 class="text-white"> Post </h1>
                 </div>
             <div class="card-body py-2">
                 <div class="d-flex">
                     <div class="col">
-                        <form v-on:submit.prevent="createPost">
+                        <form v-on:submit.prevent="createPost" enctype="multipart/form-data">
                             <div class="form-group mb-0">
                                 <label class="sr-only" for="content">Créer un post</label>
                                 <b-form-textarea name="content" type="text" v-model="content" class="form-control border-0" id="content" rows="2" placeholder="Quoi de neuf aujourd'hui ?" required></b-form-textarea>
                             </div>
-                       <div class="col">
+                            <div class="form-group">
+                            <label for="image">
+        <input type="file" id="image" ref="image" v-on:change="handleFileUpload()"/>
+      </label>
+        
+  <div class="col">
                         <button class="btn fluid btn-fposts btn-sm bg-info text-dark font-weight-bold">Envoyer</button>
+                    </div>
                     </div>
                      </form>
                     </div>
@@ -40,7 +46,7 @@ name: "sendPost",
     return {
     userId: parseInt(localStorage.getItem('userId')),
     content: "",
-         
+    image: ""   
     }
   },
  
@@ -51,13 +57,22 @@ validations: {
     }
 },
 methods:{
-    
-createPost(e) {
- e.preventDefault();   
-axios.post('http://localhost:3000/api/auth/post', {
-    userId: parseInt(localStorage.getItem('userId')),
-    content: this.content,
-},
+  handleFileUpload(){
+   
+      
+    this.image = this.$refs.image.files[0];
+},  
+createPost() {
+   const formData = new FormData();
+      if (this.imageUrl !== "") {
+        formData.append("image", this.image, this.image.name);
+        formData.append("content", this.content);
+        formData.append("userId",parseInt(localStorage.getItem('userId')));
+      } else {
+         formData.append("content", this.content);
+        formData.append("userId",parseInt(localStorage.getItem('userId')));
+      }    
+axios.post('http://localhost:3000/api/auth/post', formData,
 {
 headers: {
 'Content-Type': 'application/json',
@@ -66,17 +81,21 @@ Authorization: 'Bearer ' + localStorage.getItem('token')
 })
 
 .then((res) => {
-    
+    console.log(formData);
     this.$router.push('AllPost');
     console.log(res);
     alert("Bravo! Votre post est bien crée");
 })
 .catch(e => {
         console.log(e + "Impossible d'éditer le post, une erreur est survenue");
+        console.log(formData);
 });
+},
+
+
 }
 }
-}
+
 
 
 </script>

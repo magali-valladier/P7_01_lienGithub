@@ -7,6 +7,9 @@
 			<div class="card my-3 mx-auto">
                 {{ post.content }} 
             </div>
+            <div class="card my-3 mx-auto">
+                <img :src="post.image">
+</div>
             <div class="form-group ">
                 <div class="my-2">
                         <button type="submit" @click.prevent="" class="btn btn-fposts btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Modifier</button>
@@ -33,9 +36,12 @@ data() {
     token: localStorage.getItem("token"),
     posts: [],
     pseudo: localStorage.getItem("pseudo"),
+    image:""  
 };
+
 },
 mounted() {
+    
 axios
 .get('http://localhost:3000/api/auth/post', {
        headers: {
