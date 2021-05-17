@@ -4,12 +4,18 @@
     <h2>Tous les posts</h2>
     <div class="row mx-auto my-5" v-for="post in posts" :key="post.id">
         <div class="col-lg-8 mx-auto bg-primary ">
+            <div>
+                <img class="rounded-circle" width="50" src="https://picsum.photos/80/80/?random?image=4">
+            </div>
+            <div>
+                <p class="text-white font-weight-bold">{{ pseudo }}</p>
+            </div>
 			<div class="card my-3 mx-auto">
                 {{ post.content }} 
+                <div>
+            <img :src="post.image">
             </div>
-            <div class="card my-3 mx-auto">
-                <img :src="post.image">
-</div>
+            </div>
             <div class="form-group ">
                 <div class="my-2">
                         <button type="submit" @click.prevent="" class="btn btn-fposts btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Modifier</button>
@@ -36,7 +42,10 @@ data() {
     token: localStorage.getItem("token"),
     posts: [],
     pseudo: localStorage.getItem("pseudo"),
-    image:""  
+    post: {
+        content: "",
+        image: ""
+    }  
 };
 
 },

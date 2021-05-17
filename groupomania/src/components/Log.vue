@@ -86,8 +86,9 @@ export default {
 name: 'login',
 data() {
     return {
-    pseudo: "",   
+       
     email: "",
+    pseudo: "",
     password: "",
     submited: false,
         }
@@ -112,17 +113,17 @@ methods:{
         axios.post( 'http://localhost:3000/api/auth/login', {
               
               email: this.email,
-              pseudo: this.pseudo,
+              pseudo: localStorage.getItem("pseudo"),
               password: this.password,
            })
     
         .then((res) => {
                 localStorage.setItem("token",   res.data.token)
-                localStorage.setItem("pseudo",   res.data.pseudo)
+                localStorage.setItem("pseudo", this.pseudo)
                 localStorage.setItem("userId",  res.data.userId)
-                console.log(res.data);
+                console.log(res.data.pseudo);
                 alert("Bienvenue ! Vous êtes connecté ! ");
-                this.$router.push('AddPost');           
+                this.$router.push('Myprofile');           
             })
             
           .catch(error => {

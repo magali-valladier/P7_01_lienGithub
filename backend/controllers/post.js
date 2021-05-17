@@ -10,7 +10,7 @@ if(req.body.content == null) {
   });
 }
 
-  const post= {
+  const post = {
     content: req.body.content,
     userId: req.body.userId,
     image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,

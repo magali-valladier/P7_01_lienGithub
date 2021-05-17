@@ -18,7 +18,7 @@
                             </div>
                             <div class="form-group">
                             <label for="image">
-        <input type="file" id="image" ref="image" v-on:change="handleFileUpload()"/>
+        <input type="file" name="image" id="image" ref="image" v-on:change="handleFileUpload()"/>
       </label>
         
   <div class="col">
@@ -59,13 +59,13 @@ validations: {
 methods:{
   handleFileUpload(){
    
-      
-    this.image = this.$refs.image.files[0];
+     this.image = this.$refs.image.files[0];
+     
 },  
 createPost() {
    const formData = new FormData();
-      if (this.imageUrl !== "") {
-        formData.append("image", this.image, this.image.name);
+      if (this.image !== "") {
+        formData.append("image", this.image);
         formData.append("content", this.content);
         formData.append("userId",parseInt(localStorage.getItem('userId')));
       } else {
@@ -75,14 +75,14 @@ createPost() {
 axios.post('http://localhost:3000/api/auth/post', formData,
 {
 headers: {
-'Content-Type': 'application/json',
+"Content-Type": "multipart/form-data",
 Authorization: 'Bearer ' + localStorage.getItem('token')
 }
 })
 
 .then((res) => {
     console.log(formData);
-    this.$router.push('AllPost');
+    this.$router.push('Post');
     console.log(res);
     alert("Bravo! Votre post est bien crée");
 })
