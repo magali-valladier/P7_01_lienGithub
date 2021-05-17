@@ -13,18 +13,15 @@
 			<div class="card my-3 mx-auto">
                 {{ post.content }} 
                 <div>
-            <img :src="post.image">
+            <img :src="post.imageUrl">
             </div>
             </div>
             <div class="form-group ">
-                <div class="my-2">
-                        <button type="submit" @click.prevent="" class="btn btn-fposts btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Modifier</button>
-                        </div>
-                        <div>
-                        <button type="submit" @click.prevent="" class="btn btn-fposts btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Supprimer</button>                   
-                    </div>
-                    </div>
-                    </div>
+                <div>
+                    <button type="submit" @click.prevent="" class="btn btn-fposts btn-sm bg-info text-dark font-weight-bold"><i class="fa fa-pencil" aria-hidden="true"></i>Commenter</button>                   
+                </div>
+            </div>
+    </div>
 	</div>
 </div>
 </div>
@@ -33,6 +30,7 @@
 <script>
 
 import axios from "axios";
+
 
 export default {
 name: "posts",
@@ -44,7 +42,7 @@ data() {
     pseudo: localStorage.getItem("pseudo"),
     post: {
         content: "",
-        image: ""
+        imageUrl: ""
     }  
 };
 
@@ -60,6 +58,13 @@ axios
         this.posts = response.data;
         console.log(response);
     })
+},
+computed: {
+    postImage() {
+        console.log(this.post.imageUrl);
+        return `images/${this.imageUrl}`
+        
+    }
 }
 
 }
