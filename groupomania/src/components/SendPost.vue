@@ -82,7 +82,7 @@ Authorization: 'Bearer ' + localStorage.getItem('token')
 
 .then((res) => {
     console.log(formData);
-    this.$router.push('Post');
+    this.$router.push('/allpost');
     console.log(res);
     alert("Bravo! Votre post est bien crée");
 })

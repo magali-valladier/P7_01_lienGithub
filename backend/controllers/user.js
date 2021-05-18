@@ -59,3 +59,37 @@ exports.signup = async (req, res, next) => {
           res.status(500).json({ error: err });
         });
     };
+    exports.findByPk = (req, res) => {
+      User.findByPk(req.params.id).then((user) => {
+        res.status(200).json({
+          status: true,
+          data: user,
+        });
+      });
+    };
+    exports.update = (req, res) => {
+      const id = req.params.id;
+      User.update(
+        {
+          pseudo: req.body.pseudo,
+          email: MaskData.maskEmail2(req.body.email),
+          password: hash
+        },
+        { where: { id: id } }
+      ).then(() => {
+        res.status(200).json({
+            status: true,
+            message: "Utilisateur modifié avec id = " + id
+        });
+      });
+    };
+    exports.delete = (req, res) => {
+      const id = req.params.id;
+      User.destroy({
+        where : { id: id }
+       })
+          .then(() => res.status(200).json({ message: 'Utilisateur supprimé' }))
+          .catch(error => res.status(500).json({ error }));
+        
+     
+    };

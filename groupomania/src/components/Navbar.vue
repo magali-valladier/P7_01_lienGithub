@@ -1,7 +1,7 @@
 <template>
     <div class="Navbar">
 <b-navbar toggleable="lg" type="dark" variant="primary">
-    <a href="/"><img src="../assets/icon-left-font-monochrome-black.svg" aria-label="logo groupomania" img-fluid alt="Logo groupomania"></a>
+    <a href="/"><img class="img-fluid logo" src="../assets/icon-left-font-monochrome-black.svg" aria-label="logo groupomania" alt="Logo groupomania"></a>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
@@ -31,5 +31,9 @@ export default {
 <style scoped>
 .navbar-dark .navbar-nav .nav-link {
     color: white;
+}
+.logo {
+    max-height: 100px;
+    max-width: 200px;
 }
 </style>

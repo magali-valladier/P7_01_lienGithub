@@ -123,7 +123,7 @@ methods:{
                 localStorage.setItem("userId",  res.data.userId)
                 console.log(res.data.pseudo);
                 alert("Bienvenue ! Vous êtes connecté ! ");
-                this.$router.push('Myprofile');           
+                this.$router.push('/myprofile');           
             })
             
           .catch(error => {

@@ -9,9 +9,17 @@
       </div>
                 
                 <div>
-                <p> {{ pseudo }}</p>
+                <p class="text-dark font-weight-bold"> {{ pseudo }}</p>
                 </div>
-                 <b-link class="btn btn-light btn-lg mb-5" to="Allpost">Voir le forum</b-link>
+                <div class="form-group">
+                    <div class="col mx-auto">
+                <b-link class="btn btn-light mr-5 font-weight-bold mb-5" to="Allpost">Voir le forum</b-link>
+                <b-link class="btn btn-light font-weight-bold mb-5" to="Addpost">Rédiger un post</b-link>
+                </div>
+                <div>
+                <b-link class="btn btn-danger font-weight-bold mb-5" @click.prevent="deleteUser">Supprimer mon compte</b-link>
+                </div>
+                </div>
                 </div>
             </div>
         </section>
@@ -20,7 +28,7 @@
 
 <script>
 import {required} from "vuelidate/lib/validators"; 
-//import axios from "axios";
+import axios from "axios";
 
 
 export default {
@@ -30,6 +38,7 @@ data() {
     token: localStorage.getItem('token'),   
     image: "",
     name: "",
+    userId: parseInt(localStorage.getItem('userId')),
     pseudo: localStorage.getItem('pseudo'),
     submited: false,
         }
@@ -47,6 +56,20 @@ methods:{
       
     this.image = this.$refs.image.files[0];
 }, 
+deleteUser() {
+    const id = this.userId;
+    axios.delete('http://localhost:3000/api/auth/' + id, {
+        headers: {Authorization: "Bearer " + this.token}
+    })
+    .then(res => {
+        console.log(res);
+        alert("Votre compte à bien été supprimé !");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("pseudo");
+        this.$router.push('/login');
+    })
+}
 } 
 }
 </script>
