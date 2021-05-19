@@ -50,7 +50,8 @@ name: "sendPost",
     userId: parseInt(localStorage.getItem('userId')),
     content: "",
     image: "",
-    pseudo: ""  
+    pseudo: "",
+    id: ""  
     }
   },
  
@@ -71,14 +72,17 @@ createPost() {
    const formData = new FormData();
       if (this.image !== null) {
         formData.append("image", this.image);
+        formData.append("id", this.id);
         formData.append("content", this.content);
         formData.append("userId",parseInt(localStorage.getItem('userId')));
         formData.append("pseudo", localStorage.getItem('pseudo'));
       } else {
          formData.append("content", this.content);
+         formData.append("id", this.id);
         formData.append("userId",parseInt(localStorage.getItem('userId')));
        formData.append("pseudo", localStorage.getItem('pseudo'));
       }    
+
 axios.post('http://localhost:3000/api/auth/post', formData,
 {
 headers: {

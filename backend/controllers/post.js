@@ -24,7 +24,9 @@ console.log(post);
 
 exports.findAll = (req,res) => {
    
-  Post.findAll()
+  Post.findAll({
+    order: [['createdAt', 'DESC']]
+  })
   .then(data => {
     res.send(data);
   })

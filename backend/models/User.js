@@ -11,11 +11,11 @@ module.exports = (sequelize, Sequelize) => {
     password: {
       type: Sequelize.STRING,
     },
-  },
+   },
   {timestamps: false
   });
   User.associate = (models) => {
-    User.hasMany(models.posts, {
+    User.hasMany(models.Post, {
       foreignKey: 'userId',
     });
   }
