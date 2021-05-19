@@ -117,8 +117,9 @@ methods:{
               email: this.email,
               password: this.password
           })
-          .then(res => {
-              console.log(res);
+          .then(() => {
+              localStorage.setItem('pseudo', this.pseudo)
+              console.log(this.pseudo);
               alert("Merci ! Votre compte est bien crée");
               this.$router.push('Login');
           })

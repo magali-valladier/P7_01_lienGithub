@@ -8,6 +8,9 @@
                 <div class="card-header">
 					<h1 class="text-white"> Post </h1>
                 </div>
+                <div>
+                    <p> {{ pseudo }}</p>
+                </div>
             <div class="card-body py-2">
                 <div class="d-flex">
                     <div class="col">
@@ -46,7 +49,8 @@ name: "sendPost",
     return {
     userId: parseInt(localStorage.getItem('userId')),
     content: "",
-    image: ""   
+    image: "",
+    pseudo: ""  
     }
   },
  
@@ -63,14 +67,17 @@ methods:{
      
 },  
 createPost() {
+    console.log(this.pseudo);
    const formData = new FormData();
-      if (this.image !== "") {
+      if (this.image !== null) {
         formData.append("image", this.image);
         formData.append("content", this.content);
         formData.append("userId",parseInt(localStorage.getItem('userId')));
+        formData.append("pseudo", localStorage.getItem('pseudo'));
       } else {
          formData.append("content", this.content);
         formData.append("userId",parseInt(localStorage.getItem('userId')));
+       formData.append("pseudo", localStorage.getItem('pseudo'));
       }    
 axios.post('http://localhost:3000/api/auth/post', formData,
 {

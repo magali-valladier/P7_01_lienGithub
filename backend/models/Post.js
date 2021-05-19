@@ -14,11 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Post.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
-      }),
-      models.Post.hasMany(models.Comment, {
-        foreignKey: 'postId',
-        onDelete: 'CASCADE'
-      })      
+      })            
     }
   };
   Post.init({

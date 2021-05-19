@@ -13,7 +13,7 @@ if(req.body.content == null) {
   const post = {
     content: req.body.content,
     userId: req.body.userId,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    imageUrl: req.body.content && req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
 };
 console.log(post);
 //Enregistre le post dans la base de données
