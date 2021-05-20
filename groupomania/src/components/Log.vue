@@ -6,9 +6,7 @@
     @submit.prevent="login()"
     method="post"
     novalidate="true">
-
-      
-    <div class="form-group form-group-sm" :class="{ 'form-group--error': $v.email.$error }">
+<div class="form-group form-group-sm" :class="{ 'form-group--error': $v.email.$error }">
     <div class="col-sm-4 mx-auto">
         <label for="email">Email</label>
     <div class="input-group">
@@ -42,8 +40,7 @@
             name="password"
             type="password"
             class="form-control form-control-sm"
-            v-model.trim="$v.password.$model"
-           >
+            v-model.trim="$v.password.$model">
         </div>
         <span class="error" v-if="!$v.password.required">Champ mot de passe manquant</span> <br>
         <span class="error" v-if="!$v.password.minLength">{{$v.password.$params.minLength.min}} caractères min !.</span>
@@ -67,7 +64,6 @@ export default {
 name: 'login',
 data() {
     return {
-       
     email: "",
     password: "",
     submited: false,
@@ -75,7 +71,7 @@ data() {
     },
 
 validations: {
-   email: {
+    email: {
         required,
     },
     password: {
@@ -86,12 +82,10 @@ validations: {
 methods:{
   
     login() {
-        
-        axios.post( 'http://localhost:3000/api/auth/login', {
-              
-              email: this.email,
-              password: this.password,
-           })
+    axios.post( 'http://localhost:3000/api/auth/login', {
+        email: this.email,
+        password: this.password,
+        })
     
         .then((res) => {
                 localStorage.setItem("token",   res.data.token)
@@ -101,12 +95,11 @@ methods:{
                 this.$router.push('/myprofile');           
             })
             
-          .catch(error => {
-              console.log("Identifiants invalides !" + (error));
-          })
-          
-        },
-      goSignin(){
+        .catch(error => {
+        console.log("Identifiants invalides !" + (error));
+        })
+    },
+    goSignin(){
         this.$router.push('Signup');
     }
 }

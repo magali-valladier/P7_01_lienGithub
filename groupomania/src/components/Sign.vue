@@ -63,8 +63,7 @@
             name="password"
             type="password"
             class="form-control form-control-sm"
-            v-model.trim="$v.password.$model"
-           >
+            v-model.trim="$v.password.$model">
         </div>
         <span class="error" v-if="!$v.password.required">Mot de passe manquant</span> <br>
         <span class="error" v-if="!$v.password.minLength">{{$v.password.$params.minLength.min}} caractères min !.</span>

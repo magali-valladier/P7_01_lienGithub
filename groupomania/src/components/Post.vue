@@ -13,13 +13,13 @@
                 </div>
                 <div class="card my-3 mx-auto">
                 <img :src="image">
-</div>
+            </div>
             <div class="card-body py-2">
                 <div class="d-flex">
                     <div class="col">
-                       <div>
-                           {{ content }}
-                       </div>
+                    <div>
+                        {{ content }}
+                    </div>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,6 @@
 <script>
     export default {
         name: 'Post',
-       
     }
 </script>
 <style scoped>

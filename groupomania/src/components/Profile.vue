@@ -6,10 +6,10 @@
                 <div class="container-fluid bg-info col-6">
                     <div>
                     <img alt="Profil image" class="rounded-circle" src="https://picsum.photos/80/80/?random?image=4">
-      </div>
-      <div>
-          <p>{{pseudo}}</p>
-      </div>
+    </div>
+    <div>
+        <p>{{pseudo}}</p>
+    </div>
                 <div class="form-group">
                     <div class="col mx-auto">
                 <b-link class="btn btn-light mr-5 font-weight-bold mb-5" to="Allpost">Voir le forum</b-link>

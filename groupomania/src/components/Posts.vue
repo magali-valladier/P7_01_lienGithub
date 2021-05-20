@@ -8,7 +8,7 @@
                 <img class="rounded-circle" width="50" src="https://picsum.photos/80/80/?random?image=4">
             </div>
             <div class="text-white font-weight-bold">
-                 {{ pseudo + " " + "a écrit"}}
+                {{ pseudo + " " + "a écrit"}}
             </div>
 			<div class="card my-3 mx-auto">
                 {{ post.content }} 
@@ -33,10 +33,9 @@ name: "post",
 data() {
     
     return {
-    token: "",
     posts: [],
-    userId: localStorage.getItem("userId"),
-    pseudo: localStorage.getItem("pseudo"),
+    user_id: localStorage.getItem('userId'),
+    pseudo: localStorage.getItem('pseudo'),
     post: {
     content: "",
     imageUrl: "",
@@ -47,11 +46,13 @@ data() {
 mounted() {
     
 axios
+
 .get('http://localhost:3000/api/auth/post', {
-       headers: {
-                'authorization': 'bearer ' + localStorage.getItem('token')
+    headers: {
+        'authorization': 'bearer ' + localStorage.getItem('token')
             }})
     .then((response) => {
+        
         this.posts = response.data;
         console.log(response);
     })

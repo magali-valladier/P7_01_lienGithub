@@ -47,11 +47,10 @@ export default {
 name: "sendPost",
   data() {
     return {
-    userId: parseInt(localStorage.getItem('userId')),
+    user_id: parseInt(localStorage.getItem('userId')),
     content: "",
     image: "",
-    pseudo: "",
-    id: ""  
+    pseudo: localStorage.getItem("pseudo")
     }
   },
  
@@ -62,26 +61,21 @@ validations: {
     }
 },
 methods:{
-  handleFileUpload(){
-   
-     this.image = this.$refs.image.files[0];
-     
+    handleFileUpload(){
+        this.image = this.$refs.image.files[0];
 },  
 createPost() {
-    console.log(this.pseudo);
-   const formData = new FormData();
-      if (this.image !== null) {
+    
+    const formData = new FormData();
+        if (this.image !== null) {
         formData.append("image", this.image);
-        formData.append("id", this.id);
         formData.append("content", this.content);
-        formData.append("userId",parseInt(localStorage.getItem('userId')));
-        formData.append("pseudo", localStorage.getItem('pseudo'));
-      } else {
-         formData.append("content", this.content);
-         formData.append("id", this.id);
-        formData.append("userId",parseInt(localStorage.getItem('userId')));
-       formData.append("pseudo", localStorage.getItem('pseudo'));
-      }    
+        formData.append("user_id",parseInt(localStorage.getItem('userId')));
+        
+    } else {
+    formData.append("content", this.content);
+    formData.append("user_id",parseInt(localStorage.getItem('userId')));
+    }    
 
 axios.post('http://localhost:3000/api/auth/post', formData,
 {

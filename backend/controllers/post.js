@@ -12,21 +12,21 @@ if(req.body.content == null) {
 
   const post = {
     content: req.body.content,
-    userId: req.body.userId,
+    user_id: req.body.user_id,
     imageUrl: req.body.content && req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
 };
 console.log(post);
 //Enregistre le post dans la base de données
- Post.create(post)
+Post.create(post)
     .then(()=> res.status(201).json({ message: 'Post enregistré !'}))
     .catch(() => res.status(400).json({ message: "erreur post controller"} ));
 };
 
 exports.findAll = (req,res) => {
    
-  Post.findAll({
-    order: [['createdAt', 'DESC']]
-  })
+Post.findAll({
+    order: [['createdAt', 'DESC']],
+})
   .then(data => {
     res.send(data);
   })
