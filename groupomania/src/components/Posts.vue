@@ -8,7 +8,7 @@
                 <img class="rounded-circle" width="50" src="https://picsum.photos/80/80/?random?image=4">
             </div>
             <div class="text-white font-weight-bold">
-                {{ pseudo + " " + "a écrit"}}
+                {{ post.User.pseudo + " " + "a écrit"}}
             </div>
 			<div class="card my-3 mx-auto">
                 {{ post.content }} 
@@ -34,8 +34,8 @@ data() {
     
     return {
     posts: [],
+    User:"",
     user_id: localStorage.getItem('userId'),
-    pseudo: localStorage.getItem('pseudo'),
     post: {
     content: "",
     imageUrl: "",

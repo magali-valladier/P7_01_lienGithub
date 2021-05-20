@@ -1,5 +1,6 @@
 const db = require ("../models/index");
 const Post = db.post;
+const User = db.user;
 const fs = require('fs');
 
 exports.createPost = (req, res, next) => {
@@ -25,6 +26,7 @@ Post.create(post)
 exports.findAll = (req,res) => {
    
 Post.findAll({
+  include: [{model: User}],
     order: [['createdAt', 'DESC']],
 })
   .then(data => {

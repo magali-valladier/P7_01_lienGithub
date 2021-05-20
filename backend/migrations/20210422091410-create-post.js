@@ -17,6 +17,7 @@ module.exports = {
         allowNull: false,
         foreignKey: true,
       },
+      
       imageUrl: {
         allowNull: true,
         type: Sequelize.STRING
