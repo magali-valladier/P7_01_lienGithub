@@ -8,7 +8,7 @@
                     <img alt="Profil image" class="rounded-circle" src="https://picsum.photos/80/80/?random?image=4">
     </div>
     <div>
-        <p class="text-secondary font-weight-bold">{{pseudo}}</p>
+        <p class="text-secondary font-weight-bold">{{ pseudo}}</p>
     </div>
                 <div class="form-group">
                     <div class="col mx-auto">
@@ -34,6 +34,7 @@ export default {
 name: 'profile',
 data() {
     return {
+        
     token: localStorage.getItem('token'),   
     image: "",
     name: "",
@@ -57,6 +58,8 @@ methods:{
 }, 
 deleteUser() {
     const id = this.userId;
+    const isAdmin = 1 ;
+    if(id == id || isAdmin == 1) {
     axios.delete('http://localhost:3000/api/auth/' + id, {
         headers: {Authorization: "Bearer " + this.token}
     })
@@ -68,6 +71,7 @@ deleteUser() {
         localStorage.removeItem("pseudo");
         this.$router.push('/login');
     })
+}
 }
 } 
 }
