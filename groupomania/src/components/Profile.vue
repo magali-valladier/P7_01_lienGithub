@@ -8,7 +8,7 @@
                     <img alt="Profil image" class="rounded-circle" src="https://picsum.photos/80/80/?random?image=4">
     </div>
     <div>
-        <p>{{pseudo}}</p>
+        <p class="text-secondary font-weight-bold">{{pseudo}}</p>
     </div>
                 <div class="form-group">
                     <div class="col mx-auto">

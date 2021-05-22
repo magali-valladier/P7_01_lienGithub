@@ -14,7 +14,8 @@ exports.signup = async (req, res, next) => {
      const user = {
         pseudo: req.body.pseudo,
         email: MaskData.maskEmail2(req.body.email),
-        password: hash
+        password: hash,
+        isAdmin: 0
       };
       
       User.create(user) 
@@ -73,7 +74,8 @@ exports.signup = async (req, res, next) => {
         {
           pseudo: req.body.pseudo,
           email: MaskData.maskEmail2(req.body.email),
-          password: hash
+          password: hash,
+          isAdmin: 0
         },
         { where: { id: id } }
       ).then(() => {

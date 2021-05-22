@@ -1,40 +1,64 @@
 <template>
-<div>
-		
-<div class="col-lg-7 offset-lg-3 mx-auto mt-5 mb-5">
-    <div class="row mx-auto mt-5">
-        <div class="col-lg-8 mx-auto mt-5 mb-5">
-			<div class="card mt-5 bg-primary mx-auto mb-5">
-                <div class="card-header">
-                    <div>
-                        <img class="rounded-circle" width="50" src="https://picsum.photos/80/80/?random?image=4">
-                    </div>
-					<p class="text-white"> {{ post.pseudo }}</p>
-                </div>
-                <div class="card my-3 mx-auto">
-                <img :src="image">
+    <div class="row mx-auto my-5">
+        <div class="col-lg-8 mx-auto bg-primary ">
+            <div>
+                <img class="rounded-circle" width="50" src="https://picsum.photos/80/80/?random?image=4">
             </div>
-            <div class="card-body py-2">
-                <div class="d-flex">
-                    <div class="col">
-                    <div>
-                        {{ content }}
-                    </div>
-                    </div>
-                </div>
+            <div class="text-white font-weight-bold">
+                {{ pseudo + " " + "a écrit"}}
             </div>
-        </div>
-		</div>
-	</div>
-</div>
+			<div class="card my-3 mx-auto">
+                {{ content }} 
+                <div>
+            <img id="imgpost" :src="imageUrl">
+            </div>
+            </div>
+        <slot name="Comments"></slot>
+        <slot name="EditCom"></slot>
+         
+  </div>      
 </div>
 </template>
 
 <script>
-    export default {
-        name: 'Post',
+
+
+export default {
+name: "Post",
+
+data() {
+    return {
+
     }
+},
+    props: {
+        
+        pseudo: {
+            type: String,
+            default: ""
+        },
+        content: {
+            type: String,
+            default: ""
+        },
+        postId: {
+            type: String
+        },
+        imageUrl: {
+            type: String
+        },
+        commentContent: {
+            type: String
+        }
+    },
+}
+
 </script>
+
 <style scoped>
 
+#imgpost {
+ max-width: 200px;
+ max-height: 200px;
+}
 </style>

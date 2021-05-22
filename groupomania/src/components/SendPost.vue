@@ -9,7 +9,7 @@
 					<h1 class="text-white"> Post </h1>
                 </div>
                 <div>
-                    <p> {{ pseudo }}</p>
+                    <p class="text-white font-weight-bold"> {{ pseudo }}</p>
                 </div>
             <div class="card-body py-2">
                 <div class="d-flex">
@@ -50,6 +50,7 @@ name: "sendPost",
     user_id: parseInt(localStorage.getItem('userId')),
     content: "",
     image: "",
+    post_id:"",
     pseudo: localStorage.getItem("pseudo")
     }
   },

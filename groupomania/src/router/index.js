@@ -26,9 +26,10 @@ const routes = [
   },
   {
     path: '/allpost',
-    name: 'AllPost',
+    name: 'allpost',
     component: () => import('../views/AllPost.vue')
   }, 
+  
   {
     path: '/addpost',
     name: 'AddPost',
